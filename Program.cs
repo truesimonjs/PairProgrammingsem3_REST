@@ -12,6 +12,10 @@ namespace PairProgrammingsem3_REST
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+            // musicrecordRepo
+            MusicRecordRepository musicRepo = new();
+            builder.Services.AddSingleton<IMusicRecordRepository>(musicRepo);
+            musicRepo.AddTestData();
 
             var app = builder.Build();
 
