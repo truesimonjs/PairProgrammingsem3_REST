@@ -13,5 +13,12 @@
         {
             return new List<MusicRecordModel>(records);
         }
+
+        public MusicRecordModel Add(MusicRecordModel musicRecord)
+        {
+            records.Add(musicRecord);
+            return musicRecord;
+
+        }
     }
 }

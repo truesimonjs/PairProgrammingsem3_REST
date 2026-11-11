@@ -11,7 +11,7 @@ namespace PairProgrammingsem3_REST
 
         public int PublicationYear { get; set; }
 
-        public MusicRecordModel (string title, string artist,int durationInSeconds,int publicationYear)
+        public MusicRecordModel (string title = "test_title", string artist = "test_artist",int durationInSeconds = 10,int publicationYear = 2000)
         {
             this.Title = title;
             this.Artist = artist;
