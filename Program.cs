@@ -1,23 +1,28 @@
 
+using System.Reflection;
+
 namespace PairProgrammingsem3_REST
 {
     public class Program
     {
         public static void Main(string[] args)
         {
+            
             var builder = WebApplication.CreateBuilder(args);
+            // Add services to the container.
 
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy(name: "AllowAll",
+
+                options.AddPolicy(name: "AllowFrontend",
                                           policy =>
                                           {
-                                              policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                                              const string LOCALHOST = "http://127.0.0.1:5500";
+                                              policy.WithOrigins(LOCALHOST)
+                                                    .WithMethods("GET", "POST", "DELETE")
+                                                    .WithHeaders("Content-Type", "Authorization");
                                           });
             });
-
-
-            // Add services to the container.
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -36,6 +41,8 @@ namespace PairProgrammingsem3_REST
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("AllowFrontend");
 
             app.UseAuthorization();
 
