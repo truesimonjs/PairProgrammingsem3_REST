@@ -7,6 +7,16 @@ namespace PairProgrammingsem3_REST
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: "AllowAll",
+                                          policy =>
+                                          {
+                                              policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                                          });
+            });
+
+
             // Add services to the container.
 
             builder.Services.AddControllers();
