@@ -25,8 +25,10 @@ namespace PairProgrammingsem3_REST
             });
 
             builder.Services.AddControllers();
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
+
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+
             // musicrecordRepo
             MusicRecordRepository musicRepo = new();
             builder.Services.AddSingleton<IMusicRecordRepository>(musicRepo);
@@ -34,10 +36,13 @@ namespace PairProgrammingsem3_REST
 
             var app = builder.Build();
 
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.MapOpenApi();
             }
 
             app.UseHttpsRedirection();
