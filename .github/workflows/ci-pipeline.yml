@@ -43,4 +43,4 @@ jobs:
       # Overvej at sende baseUrl med som en variabel, hvis jeres tests kræver det.
       run: newman run postman-tests/pairprogrammingtest1.json --env-var "baseurl=http://localhost:5015" 
       
-## change in file for test
+
