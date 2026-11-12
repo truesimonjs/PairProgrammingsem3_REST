@@ -30,7 +30,7 @@ jobs:
       # Skift stien ud med stien til jeres .csproj fil for API'et
       run: dotnet run --project src/PairProgrammingsem3_REST/PairProgrammingsem3_REST.csproj &
       env:
-        ASPNETCORE_URLS: http://localhost:5000
+        ASPNETCORE_URLS: http://localhost:7198
 
     - name: Vent på at API'et er klar
       run: sleep 10 # Giver API'et tid til at starte op
@@ -41,8 +41,6 @@ jobs:
     - name: Kør Postman Tests
       # Skift stien ud til jeres eksporterede JSON-fil. 
       # Overvej at sende baseUrl med som en variabel, hvis jeres tests kræver det.
-      run: newman run postman-tests/pairprogrammingtest1.json --env-var "baseurl=http://localhost:5000"
-
-  
+      run: newman run postman-tests/pairprogrammingtest1.json --env-var "baseurl=http://localhost:7198" 
       
 
