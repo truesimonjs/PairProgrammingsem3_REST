@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="PairProgrammingsem3_REST/PairProgrammingsem3_REST.csproj" />
+  <Project Path="PairProgrammingsem3_Test/PairProgrammingsem3_Test.csproj" />
+</Solution>
