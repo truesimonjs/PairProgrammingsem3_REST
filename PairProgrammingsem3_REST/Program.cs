@@ -1,4 +1,5 @@
 
+using DotNetEnv;
 using System.Reflection;
 
 namespace PairProgrammingsem3_REST
@@ -9,16 +10,34 @@ namespace PairProgrammingsem3_REST
         {
             
             var builder = WebApplication.CreateBuilder(args);
-            // Add services to the container.
+            
+            // env coding
+            var frontendOrigin = Environment.GetEnvironmentVariable("FRONTEND_ORIGIN");
+            if (string.IsNullOrWhiteSpace(frontendOrigin)) //kigger efter en .env hvis frontendOrigin ikke kom fra github actions
+            {
+                var envFile = Path.Combine(
+                builder.Environment.ContentRootPath,
+                ".env");
 
+                if (File.Exists(envFile))
+                {
+                    Env.Load(envFile);
+                }
+                frontendOrigin = Environment.GetEnvironmentVariable("FRONTEND_ORIGIN");
+            }
+            frontendOrigin ??= "http://127.0.0.1:5500";
+
+
+
+            // Add services to the container.
             builder.Services.AddCors(options =>
             {
-
+                Console.WriteLine(frontendOrigin);
                 options.AddPolicy(name: "AllowFrontend",
                                           policy =>
                                           {
-                                              const string LOCALHOST = "http://127.0.0.1:5500";
-                                              policy.WithOrigins(LOCALHOST)
+                                             
+                                              policy.WithOrigins(frontendOrigin)
                                                     .WithMethods("GET", "POST", "DELETE")
                                                     .WithHeaders("Content-Type", "Authorization");
                                           });
