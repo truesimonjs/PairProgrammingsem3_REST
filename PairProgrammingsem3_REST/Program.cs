@@ -13,7 +13,7 @@ namespace PairProgrammingsem3_REST
             
             // env coding
             var frontendOrigin = Environment.GetEnvironmentVariable("FRONTEND_ORIGIN");
-            if (string.IsNullOrWhiteSpace(frontendOrigin)) //kører hvis frontendOrigin ikke kom fra github actions
+            if (string.IsNullOrWhiteSpace(frontendOrigin)) //kigger efter en .env hvis frontendOrigin ikke kom fra github actions
             {
                 var envFile = Path.Combine(
                 builder.Environment.ContentRootPath,
