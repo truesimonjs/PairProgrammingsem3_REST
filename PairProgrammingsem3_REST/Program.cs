@@ -10,19 +10,26 @@ namespace PairProgrammingsem3_REST
         {
             
             var builder = WebApplication.CreateBuilder(args);
-            // Add services to the container.
+            
             // env coding
-            var envFile = Path.Combine(
+            var frontendOrigin = Environment.GetEnvironmentVariable("FRONTEND_ORIGIN");
+            if (string.IsNullOrWhiteSpace(frontendOrigin)) //kører hvis frontendOrigin ikke kom fra github actions
+            {
+                var envFile = Path.Combine(
                 builder.Environment.ContentRootPath,
                 ".env");
 
-            if (File.Exists(envFile))
-            {
-                Env.Load(envFile);
+                if (File.Exists(envFile))
+                {
+                    Env.Load(envFile);
+                }
+                frontendOrigin = Environment.GetEnvironmentVariable("FRONTEND_ORIGIN");
             }
-            
-            var frontendOrigin = Environment.GetEnvironmentVariable("FRONTEND_ORIGIN") ?? "http://127.0.0.1:5500";
-            //
+            frontendOrigin ??= "http://127.0.0.1:5500";
+
+
+
+            // Add services to the container.
             builder.Services.AddCors(options =>
             {
                 Console.WriteLine(frontendOrigin);
