@@ -47,6 +47,7 @@ namespace PairProgrammingsem3_REST
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddOpenApi();
 
             // musicrecordRepo
             MusicRecordRepository musicRepo = new();
@@ -62,6 +63,7 @@ namespace PairProgrammingsem3_REST
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
+                app.MapOpenApi();
             }
 
             app.UseHttpsRedirection();
