@@ -25,7 +25,7 @@ namespace PairProgrammingsem3_REST
             //
             builder.Services.AddCors(options =>
             {
-
+                Console.WriteLine(frontendOrigin);
                 options.AddPolicy(name: "AllowFrontend",
                                           policy =>
                                           {
