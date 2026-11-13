@@ -1,4 +1,5 @@
 
+using DotNetEnv;
 using System.Reflection;
 
 namespace PairProgrammingsem3_REST
@@ -10,7 +11,18 @@ namespace PairProgrammingsem3_REST
             
             var builder = WebApplication.CreateBuilder(args);
             // Add services to the container.
+            // env coding
+            var envFile = Path.Combine(
+                builder.Environment.ContentRootPath,
+                ".env");
 
+            if (File.Exists(envFile))
+            {
+                Env.Load(envFile);
+            }
+            
+            var frontendOrigin = Environment.GetEnvironmentVariable("FRONTEND_ORIGIN") ?? "http://127.0.0.1:5500";
+            //
             builder.Services.AddCors(options =>
             {
 
