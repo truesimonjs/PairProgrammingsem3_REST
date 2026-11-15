@@ -12,6 +12,7 @@
 
         public List<MusicRecordModel> GetAll()
         {
+            Console.WriteLine("getall was called");
             return new List<MusicRecordModel>(records);
         }
 
