@@ -7,6 +7,7 @@
         {
             records.Add(new MusicRecordModel("Test entry1", "testauthor1", 10, 2003));
             records.Add(new MusicRecordModel("Test entry2", "testauthor2", 10, 2004));
+            records.Add(new MusicRecordModel("Test entry3", "testauthor3", 10, 2005));
         }
 
         public List<MusicRecordModel> GetAll()
