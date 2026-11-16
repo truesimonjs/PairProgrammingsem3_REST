@@ -1,0 +1,46 @@
+{
+  "info": {
+    "_postman_id": "8196ce08-5861-40e2-936e-c3dd0b078975",
+    "name": "pairprogrammingtest",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58116210",
+    "_collection_link": "https://go.postman.co/collection/58116210-8196ce08-5861-40e2-936e-c3dd0b078975?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Getall musicrecords",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"status code is not 404\",function (){\r\npm.response.to.not.have.status(404);\r\n})\r\npm.test(\"status code is 200 or 204\",function(){\r\n    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r\n})\r\n\r\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseurl}}/api/musicrecords",
+          "host": [
+            "{{baseurl}}"
+          ],
+          "path": [
+            "api",
+            "musicrecords"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseurl",
+      "value": "http://localhost:5283"
+    }
+  ]
+}
