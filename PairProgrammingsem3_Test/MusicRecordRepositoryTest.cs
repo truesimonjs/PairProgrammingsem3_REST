@@ -12,7 +12,7 @@ namespace PairProgrammingsem3_Test
         {
             MusicRecordRepository musicRecordRepository = new MusicRecordRepository();
             Assert.IsEmpty(musicRecordRepository.GetAll());
-            const int Length = 8;
+            const int Length = 7;
 
             string title = "";
             string artist = "";
@@ -25,12 +25,12 @@ namespace PairProgrammingsem3_Test
             }
             Assert.HasCount(Length, musicRecordRepository.GetAll());
 
-            var result = musicRecordRepository.GetAll("aaaa", null);
+            var result = musicRecordRepository.GetAll("aaa", null);
             foreach (var record in result)
             {
                 System.Diagnostics.Debug.WriteLine($"  -> Title: '{record.Title}', Artist: '{record.Artist}'");
             }
-            Assert.HasCount(Length - 3, musicRecordRepository.GetAll("aaa"));
+            Assert.HasCount(Length - 2, musicRecordRepository.GetAll("aaa"));
             Assert.HasCount(Length - 1, musicRecordRepository.GetAll(null, "bb"));
             Assert.HasCount(Length - 2, musicRecordRepository.GetAll("aa", "bbb"));
         }
