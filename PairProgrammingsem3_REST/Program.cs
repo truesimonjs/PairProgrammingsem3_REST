@@ -37,8 +37,8 @@ namespace PairProgrammingsem3_REST
                                           policy =>
                                           {
                                              
-                                              //policy.WithOrigins(frontendOrigin)
-                                              policy.AllowAnyOrigin()
+                                              policy.WithOrigins(frontendOrigin)
+                                              //policy.AllowAnyOrigin()
                                                     .WithMethods("GET", "POST", "DELETE")
                                                     .WithHeaders("Content-Type", "Authorization");
                                           });
