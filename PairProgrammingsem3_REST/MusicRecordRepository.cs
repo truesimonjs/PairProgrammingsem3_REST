@@ -12,13 +12,13 @@
         public List<MusicRecordModel> GetAll(string title = null, string artist = null)
         {
             List<MusicRecordModel> filteredMusicRecords = new List<MusicRecordModel>(records); 
-            if (title != null)
+           if (title != null)
             {
-                filteredMusicRecords = new List<MusicRecordModel>(filteredMusicRecords.FindAll(book => book.Title.ToLower().StartsWith(title.ToLower())));
+                filteredMusicRecords = new List<MusicRecordModel>(filteredMusicRecords.Where(book => book.Title.ToLower().StartsWith(title.ToLower())));
             }
             if (artist != null)
             {
-                filteredMusicRecords = new List<MusicRecordModel>(filteredMusicRecords.FindAll(book => book.Artist.ToLower().StartsWith(artist.ToLower())));
+                filteredMusicRecords = new List<MusicRecordModel>(filteredMusicRecords.Where(book => book.Artist.ToLower().StartsWith(artist.ToLower())));
             }
             return filteredMusicRecords;
         }
