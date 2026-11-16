@@ -2,7 +2,7 @@
 {
     public interface IMusicRecordRepository
     {
-        public  List<MusicRecordModel> GetAll();
+        public  List<MusicRecordModel> GetAll(string title, string artist);
 
         public MusicRecordModel Add(MusicRecordModel musicRecord);
     }

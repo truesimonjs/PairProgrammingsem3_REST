@@ -18,9 +18,11 @@ namespace PairProgrammingsem3_REST.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
-        public IEnumerable<MusicRecordModel> Get()
+        public IEnumerable<MusicRecordModel> Get(
+            [FromQuery] string title,
+            [FromQuery] string artist)
         {
-            return recordRepo.GetAll();
+            return recordRepo.GetAll(title, artist);
         }
 
         // GET api/<MusicRecordsController>/5
