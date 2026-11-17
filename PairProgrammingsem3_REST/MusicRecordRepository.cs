@@ -11,8 +11,8 @@
 
         public List<MusicRecordModel> GetAll(string title = null, string artist = null)
         {
-            List<MusicRecordModel> filteredMusicRecords = new List<MusicRecordModel>(records); 
-           if (title != null)
+            List<MusicRecordModel> filteredMusicRecords = new List<MusicRecordModel>(records);
+            if (title != null)
             {
                 filteredMusicRecords = new List<MusicRecordModel>(filteredMusicRecords.Where(book => book.Title.ToLower().StartsWith(title.ToLower())));
             }
