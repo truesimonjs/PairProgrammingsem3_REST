@@ -25,9 +25,17 @@
 
         public MusicRecordModel Add(MusicRecordModel musicRecord)
         {
+            musicRecord.id = GetNextId();
             records.Add(musicRecord);
             return musicRecord;
 
+        }
+        private int nextId = 0;
+        private int GetNextId()
+        {
+            int returnedId = nextId;
+            nextId++;
+            return returnedId;
         }
     }
 }
