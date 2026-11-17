@@ -53,9 +53,9 @@ namespace PairProgrammingsem3_REST
             builder.Services.AddOpenApi();
 
             // musicrecordRepo
-            MusicRecordRepository musicRepo = new();
-            builder.Services.AddSingleton<IMusicRecordRepository>(musicRepo);
-            musicRepo.AddTestData();
+            
+            builder.Services.AddSingleton<IMusicRecordRepository,MusicRecordRepository>();
+            
 
             var app = builder.Build();
 
