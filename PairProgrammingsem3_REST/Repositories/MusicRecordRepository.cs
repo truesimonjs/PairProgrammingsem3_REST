@@ -10,6 +10,10 @@ namespace PairProgrammingsem3_REST.Repositories
             records.Add(new MusicRecordModel("Test entry1", "testauthor1", 10, 2003));
             records.Add(new MusicRecordModel("Test entry2", "testauthor2", 10, 2004));
         }
+        public List<MusicRecordModel> GetAll()
+        {
+            return new List<MusicRecordModel>(records);
+        }
 
         public List<MusicRecordModel> GetAll(string title = null, string artist = null)
         {
@@ -25,12 +29,18 @@ namespace PairProgrammingsem3_REST.Repositories
             return filteredMusicRecords;
         }
 
-        public MusicRecordModel Create(MusicRecordModel musicRecord)
+        public MusicRecordModel Add(MusicRecordModel musicRecord)
         {
-            musicRecord.id = GetNextId();
+            musicRecord.Id = GetNextId();
             records.Add(musicRecord);
             return musicRecord;
 
+        }
+        public int Create (MusicRecordModel musicRecord)
+        {
+            musicRecord.Id = GetNextId();
+            records.Add(musicRecord);
+            return 1;
         }
         private int nextId = 0;
         private int GetNextId()
@@ -38,6 +48,18 @@ namespace PairProgrammingsem3_REST.Repositories
             int returnedId = nextId;
             nextId++;
             return returnedId;
+        }
+
+      
+
+        public MusicRecordModel Read(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

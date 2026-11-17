@@ -17,6 +17,6 @@
     {
         public List<MusicRecordModel> GetAll(string title, string artist);
 
-        //public MusicRecordModel Create(MusicRecordModel musicRecord);
+        public MusicRecordModel Add(MusicRecordModel musicRecord);
     }
 }

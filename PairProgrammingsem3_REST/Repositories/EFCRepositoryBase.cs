@@ -18,7 +18,7 @@ namespace PairProgrammingsem3_REST.Repositories
             return entity.Id;
             
         }
-        public virtual T? Read(int id)
+        public virtual T Read(int id)
         {
             using DbContext context = new TContext();
 
@@ -43,7 +43,7 @@ namespace PairProgrammingsem3_REST.Repositories
         public virtual bool Delete(int id)
         {
             using DbContext context = new TContext();
-            T? item = Read(id);
+            T item = Read(id);
             if (item == null) return false;
             context.Set<T>().Remove(item);
             return (context.SaveChanges() > 0);
