@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using PairProgrammingsem3_REST.Interfaces;
+using PairProgrammingsem3_REST.Models;
+
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,7 +22,7 @@ namespace PairProgrammingsem3_REST.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
-        public IEnumerable<MusicRecordModel> Get(
+        public IEnumerable<MusicRecord> Get(
             [FromQuery] string title,
             [FromQuery] string artist)
         {
@@ -27,27 +31,49 @@ namespace PairProgrammingsem3_REST.Controllers
 
         // GET api/<MusicRecordsController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
+        public MusicRecord Get(int id)
         {
-            return "value";
+            return recordRepo.Read(id);
         }
 
         // POST api/<MusicRecordsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
+        public MusicRecord Post([FromBody] MusicRecord value)
         {
+            return recordRepo.Add(value);
         }
 
         // PUT api/<MusicRecordsController>/5
         [HttpPut("{id}")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
         public void Put(int id, [FromBody] string value)
         {
         }
 
         // DELETE api/<MusicRecordsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
+        public MusicRecord Delete(int id)
         {
+            MusicRecord record = recordRepo.Read(id);
+            recordRepo.Delete(id);
+            return record;
+
         }
     }
 }

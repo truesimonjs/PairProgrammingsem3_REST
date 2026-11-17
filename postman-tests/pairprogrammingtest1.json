@@ -35,12 +35,149 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "CreateTest",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"status code is not 404\", function () {\n    pm.response.to.not.have.status(404);\n})\npm.test(\"status code is 200 or 201\", function() {\n    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\n})\n\n// Cleanup: delete the created record\nconst baseurl = pm.environment.get(\"baseurl\") || pm.collectionVariables.get(\"baseurl\") || pm.globals.get(\"baseurl\");\nconst token = pm.collectionVariables.get(\"authToken\");\nconst json = pm.response.json();\nconst id = json.id || json.Id || json.ID;\n\nif (id) {\n    pm.sendRequest({\n        url: baseurl + \"/api/musicrecords/\" + id,\n        method: \"DELETE\",\n        header: {\n            \"Authorization\": \"Bearer \" + token\n        }\n    }, function (err, res) {\n        if (err) {\n            console.error(\"Cleanup DELETE failed:\", err);\n        } else {\n            console.log(\"Cleanup: deleted record with id:\", id, \"status:\", res.code);\n        }\n    });\n} else {\n    console.warn(\"Cleanup: could not find id in response, skipping DELETE\");\n}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{authToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\r\n    \"title\": \"Test entry1\",\r\n    \"artist\": \"testauthor1\",\r\n    \"durationInSeconds\": 10,\r\n    \"publicationYear\": 2003\r\n  }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseurl}}/api/musicrecords",
+          "host": [
+            "{{baseurl}}"
+          ],
+          "path": [
+            "api",
+            "musicrecords"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DeleteTest",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"status code is not 404\",function (){\r\npm.response.to.not.have.status(404);\r\n})\r\npm.test(\"status code is 200 or 204\",function(){\r\n    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r\n})"
+            ]
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// Create a record to delete\nconst baseurl = pm.environment.get(\"baseurl\") || pm.collectionVariables.get(\"baseurl\") || pm.globals.get(\"baseurl\");\nconst token = pm.collectionVariables.get(\"authToken\");\n\npm.sendRequest({\n    url: baseurl + \"/api/musicrecords\",\n    method: \"POST\",\n    header: {\n        \"Content-Type\": \"application/json\",\n        \"Authorization\": \"Bearer \" + token\n    },\n    body: {\n        mode: \"raw\",\n        raw: JSON.stringify({\n            title: \"Test entry1\",\n            artist: \"testauthor1\",\n            durationInSeconds: 10,\n            publicationYear: 2003\n        })\n    }\n}, function (err, res) {\n    if (err) {\n        console.error(\"Pre-request create failed:\", err);\n    } else {\n        const json = res.json();\n        const id = json.id || json.Id || json.ID;\n        pm.collectionVariables.set(\"deleteTestId\", id);\n        console.log(\"Created record with id:\", id);\n    }\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{authToken}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseurl}}/api/musicrecords/{{deleteTestId}}",
+          "host": [
+            "{{baseurl}}"
+          ],
+          "path": [
+            "api",
+            "musicrecords",
+            "{{deleteTestId}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "const baseurl = pm.environment.get(\"baseurl\") || pm.collectionVariables.get(\"baseurl\") || pm.globals.get(\"baseurl\");",
+          "",
+          "pm.sendRequest({",
+          "    url: baseurl + \"/api/auth/login\",",
+          "    method: \"POST\",",
+          "    header: { \"Content-Type\": \"application/json\" },",
+          "    body: {",
+          "        mode: \"raw\",",
+          "        raw: JSON.stringify({",
+          "            username: \"admin\",",
+          "            password: \"1234\"",
+          "        })",
+          "    }",
+          "}, function (err, res) {",
+          "    if (err) {",
+          "        console.error(\"Login failed:\", err);",
+          "    } else {",
+          "        const token = res.json().token;",
+          "        pm.collectionVariables.set(\"authToken\", token);",
+          "        console.log(\"Login successful, token stored.\");",
+          "    }",
+          "});"
+        ]
+      }
     }
   ],
   "variable": [
     {
       "key": "baseurl",
       "value": "http://localhost:5283"
+    },
+    {
+      "key": "deleteTestId",
+      "value": ""
+    },
+    {
+      "key": "authToken",
+      "value": ""
     }
   ]
 }

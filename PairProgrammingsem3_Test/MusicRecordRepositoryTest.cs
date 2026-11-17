@@ -1,12 +1,26 @@
 ﻿using PairProgrammingsem3_REST;
+using PairProgrammingsem3_REST.Repositories;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using PairProgrammingsem3_REST.Models;
+using System.Diagnostics.Contracts;
 
 namespace PairProgrammingsem3_Test
 {
     [TestClass]
     public sealed class MusicRecordRepositoryTest
     {
+        //add and getall tests are both dependent on the other, not great but alternative is making the actual list public
+        [TestMethod]
+        public void AddTest()
+        {
+            MusicRecordRepository musicRecordRepository = new MusicRecordRepository();
+            Assert.IsEmpty(musicRecordRepository.GetAll());
+            MusicRecord musicRecord = new();
+            musicRecordRepository.Add(musicRecord);
+            Assert.Contains(musicRecord, musicRecordRepository.GetAll());
+            Assert.AreEqual(1,musicRecordRepository.GetAll().Count());
+        }
         [TestMethod]
         public void GetAllTest()
         {
@@ -21,7 +35,7 @@ namespace PairProgrammingsem3_Test
             {
                 title += "a";
                 artist += "b";
-                musicRecordRepository.Add(new MusicRecordModel(title, artist));
+                musicRecordRepository.Add(new MusicRecord(title, artist));
             }
             Assert.HasCount(Length, musicRecordRepository.GetAll());
 
@@ -34,5 +48,15 @@ namespace PairProgrammingsem3_Test
             Assert.HasCount(Length - 1, musicRecordRepository.GetAll(null, "bb"));
             Assert.HasCount(Length - 2, musicRecordRepository.GetAll("aa", "bbb"));
         }
+        [TestMethod]
+        public void DeleteTest()
+        {
+            MusicRecordRepository musicRecordRepository = new MusicRecordRepository();
+            Assert.IsEmpty(musicRecordRepository.GetAll());
+            int id = musicRecordRepository.Add(new MusicRecord()).Id;
+            musicRecordRepository.Delete(id);
+            Assert.IsEmpty(musicRecordRepository.GetAll());
+        }
     }
+    
 }
