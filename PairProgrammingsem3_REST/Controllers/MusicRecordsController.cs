@@ -29,9 +29,9 @@ namespace PairProgrammingsem3_REST.Controllers
 
         // GET api/<MusicRecordsController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public MusicRecord Get(int id)
         {
-            return "value";
+            return recordRepo.Read(id);
         }
 
         // POST api/<MusicRecordsController>
@@ -49,8 +49,12 @@ namespace PairProgrammingsem3_REST.Controllers
 
         // DELETE api/<MusicRecordsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public MusicRecord Delete(int id)
         {
+            MusicRecord record = recordRepo.Read(id);
+            recordRepo.Delete(id);
+            return record;
+
         }
     }
 }
