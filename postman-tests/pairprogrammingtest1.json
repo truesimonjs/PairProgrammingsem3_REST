@@ -52,6 +52,15 @@
       "request": {
         "method": "POST",
         "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\r\n    \"title\": \"Test entry1\",\r\n    \"artist\": \"testauthor1\",\r\n    \"durationInSeconds\": 10,\r\n    \"publicationYear\": 2003\r\n  }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
         "url": {
           "raw": "{{baseurl}}/api/musicrecords",
           "host": [
