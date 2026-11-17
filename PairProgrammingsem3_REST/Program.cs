@@ -2,6 +2,8 @@ using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
+using PairProgrammingsem3_REST.Interfaces;
+using PairProgrammingsem3_REST.Repositories;
 using System.Reflection;
 using System.Text;
 
@@ -100,9 +102,9 @@ namespace PairProgrammingsem3_REST
 
 
             // musicrecordRepo
-            MusicRecordRepository musicRepo = new();
-            builder.Services.AddSingleton<IMusicRecordRepository>(musicRepo);
-            musicRepo.AddTestData();
+            
+            builder.Services.AddSingleton<IMusicRecordRepository,EFCMusicRecordRepository>();
+            
 
             var app = builder.Build();
 
