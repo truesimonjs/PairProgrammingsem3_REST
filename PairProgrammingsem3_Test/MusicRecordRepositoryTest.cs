@@ -2,6 +2,7 @@
 using PairProgrammingsem3_REST.Repositories;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using PairProgrammingsem3_REST.Models;
 
 namespace PairProgrammingsem3_Test
 {
