@@ -1,4 +1,5 @@
 ﻿using PairProgrammingsem3_REST;
+using PairProgrammingsem3_REST.Repositories;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 
@@ -21,7 +22,7 @@ namespace PairProgrammingsem3_Test
             {
                 title += "a";
                 artist += "b";
-                musicRecordRepository.Add(new MusicRecordModel(title, artist));
+                musicRecordRepository.Create(new MusicRecordModel(title, artist));
             }
             Assert.HasCount(Length, musicRecordRepository.GetAll());
 

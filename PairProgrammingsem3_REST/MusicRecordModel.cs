@@ -1,10 +1,11 @@
-﻿using System.Reflection;
+﻿using PairProgrammingsem3_REST.Interfaces;
+using System.Reflection;
 
 namespace PairProgrammingsem3_REST
 {
-    public class MusicRecordModel
+    public class MusicRecordModel : IHasId
     {
-        public int id { get; }
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Artist { get; set; }
         public int DurationInSeconds { get; set; }

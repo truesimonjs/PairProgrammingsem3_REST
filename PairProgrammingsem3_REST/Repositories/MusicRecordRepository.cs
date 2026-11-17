@@ -1,4 +1,6 @@
-﻿namespace PairProgrammingsem3_REST
+﻿using PairProgrammingsem3_REST.Interfaces;
+
+namespace PairProgrammingsem3_REST.Repositories
 {
     public class MusicRecordRepository : IMusicRecordRepository
     {
@@ -23,7 +25,7 @@
             return filteredMusicRecords;
         }
 
-        public MusicRecordModel Add(MusicRecordModel musicRecord)
+        public MusicRecordModel Create(MusicRecordModel musicRecord)
         {
             musicRecord.id = GetNextId();
             records.Add(musicRecord);
