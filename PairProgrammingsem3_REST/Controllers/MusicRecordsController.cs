@@ -36,8 +36,9 @@ namespace PairProgrammingsem3_REST.Controllers
 
         // POST api/<MusicRecordsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public MusicRecord Post([FromBody] MusicRecord value)
         {
+            return recordRepo.Add(value);
         }
 
         // PUT api/<MusicRecordsController>/5
