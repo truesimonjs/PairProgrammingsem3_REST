@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PairProgrammingsem3_REST.Interfaces;
+using PairProgrammingsem3_REST.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,7 +20,7 @@ namespace PairProgrammingsem3_REST.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
-        public IEnumerable<MusicRecordModel> Get(
+        public IEnumerable<MusicRecord> Get(
             [FromQuery] string title,
             [FromQuery] string artist)
         {
@@ -34,8 +36,9 @@ namespace PairProgrammingsem3_REST.Controllers
 
         // POST api/<MusicRecordsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public MusicRecord Post([FromBody] MusicRecord value)
         {
+            return recordRepo.Add(value);
         }
 
         // PUT api/<MusicRecordsController>/5
