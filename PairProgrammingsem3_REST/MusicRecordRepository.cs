@@ -14,11 +14,11 @@
             List<MusicRecordModel> filteredMusicRecords = new List<MusicRecordModel>(records);
             if (title != null)
             {
-                filteredMusicRecords = new List<MusicRecordModel>(filteredMusicRecords.Where(book => book.Title.ToLower().StartsWith(title.ToLower())));
+                filteredMusicRecords = new List<MusicRecordModel>(filteredMusicRecords.Where(entry => entry.Title.ToLower().StartsWith(title.ToLower())));
             }
             if (artist != null)
             {
-                filteredMusicRecords = new List<MusicRecordModel>(filteredMusicRecords.Where(book => book.Artist.ToLower().StartsWith(artist.ToLower())));
+                filteredMusicRecords = new List<MusicRecordModel>(filteredMusicRecords.Where(entry => entry.Artist.ToLower().StartsWith(artist.ToLower())));
             }
             return filteredMusicRecords;
         }

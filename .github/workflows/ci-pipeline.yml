@@ -25,3 +25,22 @@ jobs:
 
     - name: Kør Unit Tests
       run: dotnet test --no-build --verbosity normal
+  ##
+    - name: Start API i baggrunden
+      # Skift stien ud med stien til jeres .csproj fil for API'et
+      run: dotnet run --project PairProgrammingsem3_REST/PairProgrammingsem3_REST.csproj &
+      env:
+        ASPNETCORE_URLS: http://localhost:5015
+
+    - name: Vent på at API'et er klar
+      run: sleep 10 # Giver API'et tid til at starte op
+
+    - name: Installer Newman (Postman CLI)
+      run: npm install -g newman
+
+    - name: Kør Postman Tests
+      # Skift stien ud til jeres eksporterede JSON-fil. 
+      # Overvej at sende baseUrl med som en variabel, hvis jeres tests kræver det.
+      run: newman run postman-tests/pairprogrammingtest1.json --env-var "baseurl=http://localhost:5015" 
+      
+
