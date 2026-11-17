@@ -1,42 +1,42 @@
 ﻿using PairProgrammingsem3_REST.Interfaces;
-
+using PairProgrammingsem3_REST.Models;
 namespace PairProgrammingsem3_REST.Repositories
 {
     public class MusicRecordRepository : IMusicRecordRepository
     {
-        private List<MusicRecordModel> records = new();
+        private List<MusicRecord> records = new();
         public void AddTestData()
         {
-            records.Add(new MusicRecordModel("Test entry1", "testauthor1", 10, 2003));
-            records.Add(new MusicRecordModel("Test entry2", "testauthor2", 10, 2004));
+            records.Add(new MusicRecord("Test entry1", "testauthor1", 10, 2003));
+            records.Add(new MusicRecord("Test entry2", "testauthor2", 10, 2004));
         }
-        public List<MusicRecordModel> GetAll()
+        public List<MusicRecord> GetAll()
         {
-            return new List<MusicRecordModel>(records);
+            return new List<MusicRecord>(records);
         }
 
-        public List<MusicRecordModel> GetAll(string title = null, string artist = null)
+        public List<MusicRecord> GetAll(string title = null, string artist = null)
         {
-            List<MusicRecordModel> filteredMusicRecords = new List<MusicRecordModel>(records); 
+            List<MusicRecord> filteredMusicRecords = new List<MusicRecord>(records); 
            if (title != null)
             {
-                filteredMusicRecords = new List<MusicRecordModel>(filteredMusicRecords.Where(entry => entry.Title.ToLower().StartsWith(title.ToLower())));
+                filteredMusicRecords = new List<MusicRecord>(filteredMusicRecords.Where(entry => entry.Title.ToLower().StartsWith(title.ToLower())));
             }
             if (artist != null)
             {
-                filteredMusicRecords = new List<MusicRecordModel>(filteredMusicRecords.Where(entry => entry.Artist.ToLower().StartsWith(artist.ToLower())));
+                filteredMusicRecords = new List<MusicRecord>(filteredMusicRecords.Where(entry => entry.Artist.ToLower().StartsWith(artist.ToLower())));
             }
             return filteredMusicRecords;
         }
 
-        public MusicRecordModel Add(MusicRecordModel musicRecord)
+        public MusicRecord Add(MusicRecord musicRecord)
         {
             musicRecord.Id = GetNextId();
             records.Add(musicRecord);
             return musicRecord;
 
         }
-        public int Create (MusicRecordModel musicRecord)
+        public int Create (MusicRecord musicRecord)
         {
             musicRecord.Id = GetNextId();
             records.Add(musicRecord);
@@ -52,7 +52,7 @@ namespace PairProgrammingsem3_REST.Repositories
 
       
 
-        public MusicRecordModel Read(int id)
+        public MusicRecord Read(int id)
         {
             throw new NotImplementedException();
         }

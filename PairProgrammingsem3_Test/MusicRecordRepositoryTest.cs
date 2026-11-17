@@ -22,7 +22,7 @@ namespace PairProgrammingsem3_Test
             {
                 title += "a";
                 artist += "b";
-                musicRecordRepository.Add(new MusicRecordModel(title, artist));
+                musicRecordRepository.Add(new MusicRecord(title, artist));
             }
             Assert.HasCount(Length, musicRecordRepository.GetAll());
 

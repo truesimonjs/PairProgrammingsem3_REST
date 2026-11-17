@@ -1,4 +1,5 @@
-﻿namespace PairProgrammingsem3_REST.Interfaces
+﻿using PairProgrammingsem3_REST.Models;
+namespace PairProgrammingsem3_REST.Interfaces
 {
     public interface IRepository<T> where T : IHasId
     {
@@ -13,10 +14,10 @@
 
         bool Delete(int id);
     }
-    public interface IMusicRecordRepository : IRepository<MusicRecordModel>
+    public interface IMusicRecordRepository : IRepository<MusicRecord>
     {
-        public List<MusicRecordModel> GetAll(string title, string artist);
+        public List<MusicRecord> GetAll(string title, string artist);
 
-        public MusicRecordModel Add(MusicRecordModel musicRecord);
+        public MusicRecord Add(MusicRecord musicRecord);
     }
 }

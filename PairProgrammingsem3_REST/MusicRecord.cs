@@ -1,9 +1,9 @@
 ﻿using PairProgrammingsem3_REST.Interfaces;
 using System.Reflection;
-
+/*
 namespace PairProgrammingsem3_REST
 {
-    public class MusicRecordModel : IHasId
+    public partial class MusicRecord : IHasId
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -12,7 +12,7 @@ namespace PairProgrammingsem3_REST
 
         public int PublicationYear { get; set; }
 
-        public MusicRecordModel (string title = "test_title", string artist = "test_artist",int durationInSeconds = 10,int publicationYear = 2000)
+        public MusicRecord (string title = "test_title", string artist = "test_artist",int durationInSeconds = 10,int publicationYear = 2000)
         {
             this.Title = title;
             this.Artist = artist;
@@ -24,3 +24,4 @@ namespace PairProgrammingsem3_REST
 
     }
 }
+*/
