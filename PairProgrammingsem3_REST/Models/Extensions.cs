@@ -6,7 +6,7 @@ namespace PairProgrammingsem3_REST.Models
     {
        
 
-        public MusicRecord(string title = "test_title", string artist = "test_artist", int durationInSeconds = 10, int publicationYear = 2000)
+        public MusicRecord(string title = "test_title", string artist = "test_artist", int? durationInSeconds = 10, int? publicationYear = 2000)
         {
             this.Title = title;
             this.Artist = artist;
