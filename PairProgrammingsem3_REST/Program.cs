@@ -26,7 +26,6 @@ namespace PairProgrammingsem3_REST
                 frontendOrigin = Environment.GetEnvironmentVariable("FRONTEND_ORIGIN");
             }
             frontendOrigin ??= "http://127.0.0.1:5500";
-            Console.WriteLine(frontendOrigin);
 
 
 
