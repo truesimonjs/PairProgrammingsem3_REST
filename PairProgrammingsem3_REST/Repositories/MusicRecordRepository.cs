@@ -54,12 +54,12 @@ namespace PairProgrammingsem3_REST.Repositories
 
         public MusicRecord Read(int id)
         {
-            throw new NotImplementedException();
+            return records.Where(entry => entry.Id == id).FirstOrDefault();
         }
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+           return records.Remove(Read(id));
         }
     }
 }
